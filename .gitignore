@@ -1,21 +1,8 @@
-# Dependencies
+# -------------------------
+# Node.js / Frontend
+# -------------------------
 node_modules/
-
-# Python
-__pycache__/
-*.pyc
-backend/venv/
-
-# Backend - do not commit
-backend/
-
-# Database - do not commit
-database/
-
-# Frontend dependencies
 frontend/node_modules/
-
-# Frontend build files
 frontend/dist/
 frontend/build/
 
@@ -25,9 +12,33 @@ frontend/build/
 frontend/.env
 frontend/.env.local
 
-# Local dev artifacts
+# -------------------------
+# Python / Backend
+# -------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 *.log
+backend/venv/
 
-# OS
+# Ignore backend binaries but keep source
+backend/*.db
+backend/__pycache__/
+backend/*.log
+
+# -------------------------
+# Database
+# -------------------------
+# Ignore database binaries
+database/*.db
+
+# Allow SQL and docs
+!database/*.sql
+!database/README.md
+
+# -------------------------
+# OS / Misc
+# -------------------------
 .DS_Store
 Thumbs.db
