@@ -5,7 +5,7 @@ from app.extensions import db
 from app.models import (
     User, Donor, NGO, Volunteer, Donation,
     Request as FoodRequest, Assignment, Delivery,
-    VolunteerLocation, Report, Payment, Log, Notification
+    VolunteerLocation, Report, Log, Notification
 )
 
 app = create_app()
