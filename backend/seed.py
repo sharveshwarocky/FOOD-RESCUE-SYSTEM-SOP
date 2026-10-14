@@ -390,9 +390,8 @@ def seed_database():
         db.session.add_all([rep, pay, log1])
         db.session.commit()
 
-        print("==================================================")
-        print(" Database Seeded Successfully with Broadcast Workflow!")
-        print(" Demo Credentials:")
+        print("===============================")
+        print(" Database Seeded Successfully ")
         print("  - Admin:       username: admin      password: Admin@123")
         print("  - Donor:       username: donor      password: Donor@123")
         print("  - NGO 1:       username: ngo        password: Ngo@123")
@@ -401,7 +400,7 @@ def seed_database():
         print("  - Volunteer 1: username: volunteer  password: Volunteer@123")
         print("  - Volunteer 2: username: volunteer2 password: Volunteer@123")
         print("  - Volunteer 3: username: volunteer3 password: Volunteer@123")
-        print("==================================================")
+        print("================================")
 
 if __name__ == '__main__':
     seed_database()
