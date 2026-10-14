@@ -1,5 +1,3 @@
--- Schema SQL for Food Rescue & Redistribution System
-
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username VARCHAR(80) NOT NULL UNIQUE,

@@ -4,24 +4,23 @@ from app.extensions import db
 class Donation(db.Model):
     __tablename__ = 'donations'
     
-    EXPIRING_SOON_THRESHOLD = timedelta(hours=2)  # Flag donations expiring within 2 hours
-
+    EXPIRING_SOON_THRESHOLD = timedelta(hours=2)  
+    
     id = db.Column(db.Integer, primary_key=True)
     donor_id = db.Column(db.Integer, db.ForeignKey('donors.id'), nullable=False)
     title = db.Column(db.String(150), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    food_type = db.Column(db.String(50), nullable=False)  # Cooked Meals, Raw Groceries, Bakery Items, Fruits & Veggies, Packaged Goods
-    quantity = db.Column(db.String(50), nullable=False)  # e.g., "50 kg", "20 Meals"
+    food_type = db.Column(db.String(50), nullable=False) 
+    quantity = db.Column(db.String(50), nullable=False)
     image = db.Column(db.String(255), nullable=True)
     pickup_address = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=True)
     longitude = db.Column(db.Float, nullable=True)
-    allowed_ngo_id = db.Column(db.Integer, db.ForeignKey('ngos.id'), nullable=True)  # Optional specific NGO permission
-    prep_time = db.Column(db.DateTime, nullable=True)   # When the food was prepared (naive UTC)
-    expiry_time = db.Column(db.DateTime, nullable=True) # Safe-consumption deadline (naive UTC)
+    allowed_ngo_id = db.Column(db.Integer, db.ForeignKey('ngos.id'), nullable=True) 
+    prep_time = db.Column(db.DateTime, nullable=True)  
+    expiry_time = db.Column(db.DateTime, nullable=True) 
     status = db.Column(db.String(30), default='PENDING_ADMIN_APPROVAL')
-    # PENDING_ADMIN_APPROVAL, APPROVED, NGO_REQUESTED, DONOR_ACCEPTED, VOLUNTEER_ASSIGNED, PICKED_UP, OUT_FOR_DELIVERY, DELIVERED, COMPLETED, REJECTED, CANCELLED, EXPIRED
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+  
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     cancelled_at = db.Column(db.DateTime, nullable=True)
 
@@ -41,7 +40,7 @@ class Donation(db.Model):
     def to_dict(self):
         donor_info = self.donor.to_dict() if self.donor else {}
         
-        # Determine accepted NGO and assigned volunteer if applicable
+    
         accepted_req = next((r for r in self.requests if r.status in ['ACCEPTED', 'COMPLETED']), None)
         accepted_ngo_name = accepted_req.ngo.ngo_name if accepted_req and accepted_req.ngo else None
         accepted_ngo_id = accepted_req.ngo_id if accepted_req else None

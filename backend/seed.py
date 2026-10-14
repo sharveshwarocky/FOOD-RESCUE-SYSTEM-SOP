@@ -16,7 +16,6 @@ def seed_database():
         db.drop_all()
         db.create_all()
 
-        # 1. Create Admin User
         admin_user = User(
             username='admin',
             email='admin@foodrescue.org',
@@ -28,7 +27,6 @@ def seed_database():
         admin_user.set_password('Admin@123')
         db.session.add(admin_user)
 
-        # 2. Create Donor User & Profile
         donor_user = User(
             username='donor',
             email='donor@hotelgrand.com',
@@ -50,7 +48,6 @@ def seed_database():
         )
         db.session.add(donor_profile)
 
-        # 3. Create NGO Users & Profiles (NGO 1, NGO 2, NGO 3)
         ngo_user = User(
             username='ngo',
             email='contact@hopefoundation.org',
@@ -73,7 +70,6 @@ def seed_database():
         )
         db.session.add(ngo_profile)
 
-        # NGO 2
         ngo2_user = User(
             username='ngo2',
             email='contact@annapoorna.org',
@@ -96,7 +92,6 @@ def seed_database():
         )
         db.session.add(ngo2_profile)
 
-        # NGO 3
         ngo3_user = User(
             username='ngo3',
             email='seva@communitykitchen.org',
@@ -119,7 +114,6 @@ def seed_database():
         )
         db.session.add(ngo3_profile)
 
-        # 4. Create Volunteer Users & Profiles (Volunteer 1, Volunteer 2, Volunteer 3)
         vol_user = User(
             username='volunteer',
             email='alex.volunteer@gmail.com',
@@ -143,7 +137,6 @@ def seed_database():
         )
         db.session.add(vol_profile)
 
-        # Second volunteer - farther from pickup point
         vol2_user = User(
             username='volunteer2',
             email='priya.volunteer@gmail.com',
@@ -167,7 +160,6 @@ def seed_database():
         )
         db.session.add(vol2_profile)
 
-        # Third volunteer - approved but no static GPS (HTML5 GPS broadcast demo)
         vol3_user = User(
             username='volunteer3',
             email='ravi.volunteer@gmail.com',
@@ -193,10 +185,8 @@ def seed_database():
 
         db.session.commit()
 
-        # 5. Create Sample Donations matching the new workflow
         now = datetime.utcnow()
 
-        # Donation 1: AVAILABLE (NGO 1, NGO 2, NGO 3 can all view and accept)
         donation1 = Donation(
             donor_id=donor_profile.id,
             title='Surplus Buffet Meals & Rice Bowls',
@@ -207,11 +197,10 @@ def seed_database():
             latitude=donor_profile.latitude,
             longitude=donor_profile.longitude,
             prep_time=now - timedelta(hours=2),
-            expiry_time=now + timedelta(hours=6),   # FRESH
+            expiry_time=now + timedelta(hours=6),  
             status='APPROVED'
         )
 
-        # Donation 2: AVAILABLE (Fresh bakery items)
         donation2 = Donation(
             donor_id=donor_profile.id,
             title='Fresh Bakery Breads & Muffins',
@@ -226,7 +215,6 @@ def seed_database():
             status='APPROVED'
         )
 
-        # Donation 3: NGO ACCEPTED -> Broadcasted to ALL volunteers! (Ready for Volunteer 1, 2, or 3 to claim)
         donation3 = Donation(
             donor_id=donor_profile.id,
             title='Veg Sandwich Packs - Closing Time Batch',
@@ -241,7 +229,6 @@ def seed_database():
             status='NGO_ACCEPTED'
         )
 
-        # Donation 4: EXPIRED (FSSAI compliance check blocks this)
         donation4 = Donation(
             donor_id=donor_profile.id,
             title='Evening Chaat & Snacks - Expired Batch',
@@ -256,7 +243,6 @@ def seed_database():
             status='APPROVED'
         )
 
-        # Donation 5: IN TRANSIT (Out for Delivery by Volunteer 1 to NGO 2)
         donation5 = Donation(
             donor_id=donor_profile.id,
             title='Hot Dal & Roti Banquet Pack',
@@ -271,7 +257,6 @@ def seed_database():
             status='OUT_FOR_DELIVERY'
         )
 
-        # Donation 6: COMPLETED (Delivered to NGO 3, 50 beneficiaries fed)
         donation6 = Donation(
             donor_id=donor_profile.id,
             title='Breakfast Hampers & Fruit Bowls',
@@ -289,8 +274,6 @@ def seed_database():
         db.session.add_all([donation1, donation2, donation3, donation4, donation5, donation6])
         db.session.commit()
 
-        # 6. Create NGO Requests corresponding to accepted/in-transit/completed donations
-        # Request for Donation 3: NGO 1 Accepted, awaiting volunteer claim
         req3 = FoodRequest(
             donation_id=donation3.id,
             ngo_id=ngo_profile.id,
@@ -301,7 +284,6 @@ def seed_database():
             responded_at=now - timedelta(minutes=15)
         )
 
-        # Request for Donation 5: NGO 2 Accepted, assigned to Volunteer 1, OUT_FOR_DELIVERY
         req5 = FoodRequest(
             donation_id=donation5.id,
             ngo_id=ngo2_profile.id,
@@ -312,7 +294,6 @@ def seed_database():
             responded_at=now - timedelta(hours=1)
         )
 
-        # Request for Donation 6: NGO 3 Completed
         req6 = FoodRequest(
             donation_id=donation6.id,
             ngo_id=ngo3_profile.id,
@@ -326,8 +307,6 @@ def seed_database():
         db.session.add_all([req3, req5, req6])
         db.session.commit()
 
-        # 7. Create Assignments & Deliveries for in-transit and completed donations
-        # Assignment for Donation 5: Volunteer 1 on active delivery duty
         assign5 = Assignment(
             request_id=req5.id,
             volunteer_id=vol_profile.id,
@@ -347,7 +326,6 @@ def seed_database():
         )
         db.session.add(delivery5)
 
-        # Assignment for Donation 6: Volunteer 2 completed run
         assign6 = Assignment(
             request_id=req6.id,
             volunteer_id=vol2_profile.id,
@@ -372,7 +350,6 @@ def seed_database():
         )
         db.session.add(delivery6)
 
-        # 8. Volunteer live GPS ping records
         vol_loc = VolunteerLocation(
             volunteer_id=vol_profile.id,
             latitude=28.6200,
@@ -385,7 +362,6 @@ def seed_database():
         )
         db.session.add_all([vol_loc, vol2_loc])
 
-        # 9. Create Notifications for Volunteers announcing open task
         for v in [vol_user, vol2_user, vol3_user]:
             n = Notification(
                 user_id=v.id,
@@ -395,7 +371,7 @@ def seed_database():
             )
             db.session.add(n)
 
-        # 10. Reports, Payments, and Audit Logs
+        # 10. Reports and Audit Logs
         rep = Report(
             month='April',
             year=2026,
@@ -403,13 +379,6 @@ def seed_database():
             total_deliveries=28,
             beneficiaries=530,
             food_saved='80.0 kg'
-        )
-        pay = Payment(
-            transaction_id='TXN-INIT-1001',
-            user_id=vol_user.id,
-            amount=500.0,
-            purpose='Volunteer Logistics Support Grant',
-            status='SUCCESS'
         )
         log1 = Log(
             user_id=admin_user.id,
