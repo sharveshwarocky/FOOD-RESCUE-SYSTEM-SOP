@@ -24,6 +24,7 @@ def post_food():
 
     donor = user.donor_profile
 
+    # Extract Form Data
     title = request.form.get('title', '').strip()
     description = request.form.get('description', '').strip()
     food_type = request.form.get('food_type', 'Cooked Meals').strip()
@@ -37,6 +38,7 @@ def post_food():
     else:
         allowed_ngo_id = None
 
+    # Optional expiry tracking fields (ISO 8601; normalized to naive UTC)
     def parse_utc_datetime(field_name):
         raw = request.form.get(field_name, '').strip()
         if not raw:
@@ -63,6 +65,7 @@ def post_food():
     if not title or not quantity or not pickup_address:
         return jsonify({'success': False, 'message': 'Title, quantity, and pickup address are required'}), 400
 
+    # Image upload handling
     image_filename = None
     if 'image' in request.files:
         file = request.files['image']
@@ -93,6 +96,7 @@ def post_food():
 
     log_action(user_id, "DONATION_POSTED", "Donation", donation.id, f"Donor posted surplus food '{title}' ({quantity})")
 
+    # Notify all approved NGOs
     ngos = NGO.query.all()
     for n in ngos:
         if n.user and (allowed_ngo_id is None or allowed_ngo_id == n.id):
@@ -199,6 +203,7 @@ def cancel_donation(donation_id):
     if not donation or donation.donor_id != user.donor_profile.id:
         return jsonify({'success': False, 'message': 'Donation not found or unauthorized'}), 404
 
+    # 20-minute window check
     now = datetime.utcnow()
     time_limit = donation.created_at + timedelta(minutes=20)
     if now > time_limit:

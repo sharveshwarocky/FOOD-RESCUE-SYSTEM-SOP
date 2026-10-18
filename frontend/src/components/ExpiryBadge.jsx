@@ -8,7 +8,6 @@ const STYLES = {
   NO_EXPIRY_INFO: { cls: 'text-slate-500 bg-slate-100 border-slate-200', Icon: MinusCircle, label: 'NO EXPIRY INFO' },
 };
 
-// Renders the donation's computed expiry_state from the API (fresh / expiring-soon / expired)
 const ExpiryBadge = ({ state }) => {
   const style = STYLES[state] || STYLES.NO_EXPIRY_INFO;
   const Icon = style.Icon;

@@ -10,6 +10,7 @@ from app.services.notification_service import create_notification
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/api/admin')
 
+# ----------------- USER & MANAGEMENT ENDPOINTS -----------------
 
 @admin_bp.route('/users/approve-status', methods=['POST'])
 @jwt_required()

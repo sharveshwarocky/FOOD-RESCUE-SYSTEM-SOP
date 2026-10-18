@@ -371,7 +371,6 @@ def seed_database():
             )
             db.session.add(n)
 
-        # 10. Reports and Audit Logs
         rep = Report(
             month='April',
             year=2026,
