@@ -20,7 +20,6 @@ const DonorHistory = () => {
   const columns = [
     { header: 'Food Title', accessor: 'title', cell: (r) => <span className="font-bold text-slate-800">{r.title}</span> },
     { header: 'Category', accessor: 'food_type' },
-    { header: 'Quantity', accessor: 'quantity' },
     { header: 'Completed Date', accessor: 'updated_at', cell: (r) => new Date(r.updated_at).toLocaleDateString() },
     { header: 'Status', accessor: 'status', cell: (r) => <StatusBadge status={r.status} /> }
   ];
@@ -29,7 +28,6 @@ const DonorHistory = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-slate-800">Donation History</h2>
-        <p className="text-xs text-slate-500 mt-0.5">Completed and past food rescue contributions</p>
       </div>
 
       <DataTable columns={columns} data={history} emptyText="No historical completed donations." />

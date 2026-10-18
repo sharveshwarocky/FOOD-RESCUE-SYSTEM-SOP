@@ -46,7 +46,7 @@ const NGODashboard = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">NGO Shelter Dashboard</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Browse available surplus food, submit requests, & confirm beneficiary deliveries</p>
+        
         </div>
         <Link to="/ngo/donations">
           <Button icon={UtensilsCrossed}>Browse Available Food</Button>
@@ -61,7 +61,6 @@ const NGODashboard = () => {
         <DashboardCard title="Completed Deliveries" value={completedReqs.length} icon={PackageCheck} color="emerald" subtitle="Food received & served" />
       </div>
 
-      {/* Available Food Section */}
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="font-bold text-slate-800 text-base">Latest Available Surplus Food Donations</h3>

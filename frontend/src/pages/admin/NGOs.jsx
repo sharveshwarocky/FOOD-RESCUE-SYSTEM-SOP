@@ -91,7 +91,7 @@ const AdminNGOs = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">NGO Management</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Verify and manage NGO partner registrations</p>
+         
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <SearchBar value={search} onChange={setSearch} placeholder="Search NGO name or reg #..." />

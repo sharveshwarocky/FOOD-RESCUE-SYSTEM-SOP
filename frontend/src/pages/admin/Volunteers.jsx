@@ -69,7 +69,6 @@ const AdminVolunteers = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">Volunteer Management</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Approve and monitor active delivery volunteers</p>
         </div>
         <SearchBar value={search} onChange={setSearch} placeholder="Search volunteer name..." />
       </div>

@@ -386,7 +386,7 @@ def seed_database():
             entity_id=1,
             description="Initialized Food Rescue System with Broadcast Workflow: NGO 1/2/3 and Volunteer 1/2/3."
         )
-        db.session.add_all([rep, pay, log1])
+        db.session.add_all([rep, log1])
         db.session.commit()
 
         print("===============================")

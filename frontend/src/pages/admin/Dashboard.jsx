@@ -38,12 +38,9 @@ const AdminDashboard = () => {
           <h2 className="text-2xl font-bold text-slate-800">Admin Overview Dashboard</h2>
           
         </div>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-bold border border-purple-200">
-          <ShieldCheck className="w-4 h-4" /> System Online & Healthy
-        </span>
+       
       </div>
 
-      {/* 8 Primary Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <DashboardCard title="Total Donations" value={metrics.total_donations} icon={UtensilsCrossed} color="emerald" />
         <DashboardCard title="Total Deliveries" value={metrics.total_deliveries} icon={PackageCheck} color="blue" />
@@ -55,11 +52,8 @@ const AdminDashboard = () => {
         <DashboardCard title="Registered Donors" value={metrics.registered_donors} icon={HeartHandshake} color="emerald"/>
       </div>
 
-      {/* Redistribution Analytics Chart */}
       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
         <h3 className="font-bold text-slate-800 text-lg mb-1">Monthly Food Rescue & Redistribution Trends</h3>
-        <p className="text-xs text-slate-500 mb-4">Total monthly donations vs completed NGO deliveries</p>
-        
         <div className="h-72 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={charts.monthly_stats}>

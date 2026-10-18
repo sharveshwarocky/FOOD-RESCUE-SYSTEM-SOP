@@ -37,7 +37,6 @@ const AdminLogs = () => {
     { header: 'Action', accessor: 'action', cell: (r) => <span className="font-mono text-xs font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">{r.action}</span> },
     { header: 'User', accessor: 'username', cell: (r) => <span className="font-semibold text-slate-800">{r.username}</span> },
     { header: 'Description', accessor: 'description', cell: (r) => <span className="text-xs text-slate-600">{r.description}</span> },
-    { header: 'IP Address', accessor: 'ip_address', cell: (r) => <code className="text-xs font-mono bg-slate-100 px-1.5 py-0.5 rounded">{r.ip_address || '127.0.0.1'}</code> },
     { header: 'Timestamp', accessor: 'timestamp', cell: (r) => new Date(r.timestamp).toLocaleString() }
   ];
 
@@ -53,7 +52,6 @@ const AdminLogs = () => {
         </div>
         <SearchBar value={search} onChange={setSearch} placeholder="Search action or user..." />
       </div>
-
       <DataTable columns={columns} data={filtered} emptyText="No audit logs recorded." />
     </div>
   );

@@ -180,7 +180,7 @@ const VolunteerTracking = () => {
                 onClick={() => userLat && userLng && setFocusCoords([userLat, userLng])}
                 className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 font-semibold bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-xl transition-colors"
               >
-                <Navigation className="w-3.5 h-3.5" /> Center on Me
+  
               </button>
             </div>
           </div>
@@ -273,12 +273,6 @@ const VolunteerTracking = () => {
               </Link>
             )}
 
-            <Link
-              to="/volunteer/assignments"
-              className="text-xs text-slate-500 hover:text-slate-700 underline font-medium ml-auto"
-            >
-              View Full Assignment Details &rarr;
-            </Link>
           </div>
         </div>
       ) : (

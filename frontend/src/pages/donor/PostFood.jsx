@@ -59,7 +59,7 @@ const PostFood = () => {
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-slate-800">Post Surplus Food</h2>
-        <p className="text-xs text-slate-500 mt-0.5">Share excess food details for instant NGO request & volunteer pickup</p>
+       
       </div>
 
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
@@ -108,7 +108,7 @@ const PostFood = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Prepared At (Optional)</label>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">Prepared Time</label>
             <input
               type="datetime-local"
               value={prepTime}
@@ -117,19 +117,18 @@ const PostFood = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-1">Best Before / Expiry Time</label>
+            <label className="block text-sm font-semibold text-slate-700 mb-1">Expiry Time</label>
             <input
               type="datetime-local"
               value={expiryTime}
               onChange={(e) => setExpiryTime(e.target.value)}
               className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500"
             />
-            <p className="text-[10px] text-slate-400 mt-1">FSSAI safety: donations past this time are blocked from NGO requests</p>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-slate-700 mb-1">Food Description / Notes</label>
+          <label className="block text-sm font-semibold text-slate-700 mb-1">Food Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -147,8 +146,7 @@ const PostFood = () => {
           longitude={longitude}
           setLongitude={setLongitude}
         />
-
-        <ImageUpload onChange={setImageFile} label="Food Photo (Camera Capture or File Upload)" />
+        <ImageUpload onChange={setImageFile} label="Camera Capture food or File Upload (we will accept only GeoTag photo)" />
 
         <div className="pt-2 flex items-center justify-end gap-3">
           <Button variant="secondary" onClick={() => navigate('/donor/dashboard')}>

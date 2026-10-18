@@ -39,7 +39,7 @@ const AdminAnalytics = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-bold text-slate-800">Advanced Analytics Dashboard</h2>
-        <p className="text-xs text-slate-500 mt-0.5">Visual breakdown of food rescue operations & impact metrics</p>
+  
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

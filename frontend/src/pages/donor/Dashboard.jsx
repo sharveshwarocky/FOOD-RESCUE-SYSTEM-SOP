@@ -40,7 +40,6 @@ const DonorDashboard = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-2xl font-bold text-slate-800">Donor Portal Dashboard</h2>
-          <p className="text-xs text-slate-500 mt-0.5">Post surplus food and manage NGO distribution requests</p>
         </div>
         <Link to="/donor/post-food">
           <Button icon={PlusCircle}>Post Surplus Food</Button>
@@ -82,9 +81,6 @@ const DonorDashboard = () => {
                     <MapPin className="w-3 h-3 text-emerald-600" /> {d.pickup_address}
                   </p>
                 </div>
-                <Link to="/donor/requests">
-                  <Button size="sm" variant="outline">Check Requests</Button>
-                </Link>
               </div>
             ))}
           </div>
