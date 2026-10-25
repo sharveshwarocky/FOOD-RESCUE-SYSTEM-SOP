@@ -21,6 +21,7 @@ A full-stack, modular, role-based web application connecting **Food Donors, NGOs
 
 ```bash
 cd backend
+python -m pip install -r requirements.txt
 python seed.py        
 python run.py         
 ```
