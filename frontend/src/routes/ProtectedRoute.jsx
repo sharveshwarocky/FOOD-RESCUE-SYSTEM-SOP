@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
   }
 
   if (allowedRoles.length > 0 && !allowedRoles.includes(user.role?.toUpperCase())) {
-    // Redirect to user's assigned dashboard if trying to access unauthorized route
+  
     const roleDashboards = {
       ADMIN: '/admin/dashboard',
       DONOR: '/donor/dashboard',

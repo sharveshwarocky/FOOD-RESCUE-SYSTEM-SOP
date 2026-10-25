@@ -32,7 +32,6 @@ export const useGeolocation = (isVolunteerActive = false) => {
 
     setLoading(true);
 
-    // Try high accuracy first
     navigator.geolocation.getCurrentPosition(
       (pos) => handlePositionSuccess(pos),
       (err) => {
@@ -56,11 +55,9 @@ export const useGeolocation = (isVolunteerActive = false) => {
 
     if (!navigator.geolocation) return;
 
-    // Start watch for continuous real-time movement
     const watchId = navigator.geolocation.watchPosition(
       handlePositionSuccess,
       (err) => {
-        // Non-critical background watch error; do not override acquired location
         console.debug('[Geolocation Watch Notice]', err.message);
       },
       {

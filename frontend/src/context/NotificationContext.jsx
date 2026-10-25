@@ -18,7 +18,6 @@ export const NotificationProvider = ({ children }) => {
         setUnreadCount(res.notifications.filter(n => !n.is_read).length);
       }
     } catch (e) {
-      // Silent fail
     }
   };
 
@@ -33,7 +32,7 @@ export const NotificationProvider = ({ children }) => {
       await notificationService.markAsRead(id);
       fetchNotifications();
     } catch (e) {
-      // Silent fail
+ 
     }
   };
 

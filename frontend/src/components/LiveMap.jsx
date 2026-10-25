@@ -4,7 +4,7 @@ import L from 'leaflet';
 import { calculateDistanceKm, formatDistance } from '../utils/distance';
 import { Navigation, Crosshair, RefreshCw, Layers, Phone, MapPin, Truck, Building2, HeartHandshake, Eye } from 'lucide-react';
 
-// Custom HTML DivIcons with inline SVGs for 100% reliable rendering without CDN dependencies
+
 const createCustomIcon = (type, label = '', isActive = false) => {
   let bgClass = 'bg-blue-600';
   let borderClass = 'border-blue-200';
@@ -16,7 +16,7 @@ const createCustomIcon = (type, label = '', isActive = false) => {
     bgClass = isActive ? 'bg-blue-600 ring-4 ring-blue-300' : 'bg-indigo-600';
     borderClass = 'border-white';
     shadowClass = 'shadow-indigo-500/50';
-    // Truck SVG
+  
     iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18.5" r="2.5"/><circle cx="7" cy="18.5" r="2.5"/></svg>`;
     if (isActive) {
       pulseHtml = `<span class="absolute -inset-2 rounded-full bg-blue-400 opacity-60 animate-ping"></span>`;
@@ -25,19 +25,19 @@ const createCustomIcon = (type, label = '', isActive = false) => {
     bgClass = 'bg-emerald-600';
     borderClass = 'border-white';
     shadowClass = 'shadow-emerald-500/50';
-    // Food / Package Heart SVG
+  
     iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 0 0 9-9H3a9 9 0 0 0 9 9Z"/><path d="M19 12a7 7 0 0 0-14 0"/><path d="M12 3v3"/></svg>`;
   } else if (type === 'ngo') {
     bgClass = 'bg-amber-600';
     borderClass = 'border-white';
     shadowClass = 'shadow-amber-500/50';
-    // Building SVG
+  
     iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>`;
   } else if (type === 'user') {
     bgClass = 'bg-rose-600 ring-4 ring-rose-300';
     borderClass = 'border-white';
     shadowClass = 'shadow-rose-500/50';
-    // Target Compass SVG
+
     iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`;
     pulseHtml = `<span class="absolute -inset-2.5 rounded-full bg-rose-400 opacity-60 animate-ping"></span>`;
   }
@@ -63,19 +63,16 @@ const createCustomIcon = (type, label = '', isActive = false) => {
   });
 };
 
-// Map Controller for smooth flyTo and dynamic bounds auto-fitting
 const MapController = ({ focusCoords, bounds, userLocation, triggerRecenter }) => {
   const map = useMap();
   const hasCenteredInitially = useRef(false);
 
-  // Focus on specific coordinates when requested
   useEffect(() => {
     if (focusCoords && focusCoords[0] && focusCoords[1]) {
       map.flyTo(focusCoords, 15, { animate: true, duration: 1.2 });
     }
   }, [focusCoords, map]);
 
-  // Recenter / Fit All trigger
   useEffect(() => {
     if (bounds && bounds.length > 0) {
       try {
@@ -116,14 +113,13 @@ const LiveMap = ({
   const [recenterTrigger, setRecenterTrigger] = useState(0);
   const [activeFocus, setActiveFocus] = useState(null);
 
-  // Sync external focusCoords
   useEffect(() => {
     if (focusCoords) {
       setActiveFocus(focusCoords);
     }
   }, [focusCoords]);
 
-  // Filter items
+
   const filteredVolunteers = useMemo(() => {
     if (filter === 'donors' || filter === 'ngos') return [];
     return volunteers.filter(v => v.latitude && v.longitude && v.latitude !== 0);
@@ -144,7 +140,7 @@ const LiveMap = ({
     return activeDeliveries;
   }, [activeDeliveries, filter]);
 
-  // Collect all valid coordinates for bounding box calculation
+ 
   const allCoordinates = useMemo(() => {
     const coords = [];
     filteredVolunteers.forEach(v => coords.push([v.latitude, v.longitude]));
@@ -156,7 +152,7 @@ const LiveMap = ({
     return coords;
   }, [filteredVolunteers, filteredDonors, filteredNgos, userLocation]);
 
-  // Dynamic initial center fallback
+ 
   const mapCenter = useMemo(() => {
     if (userLocation && userLocation.latitude && userLocation.longitude) {
       return [userLocation.latitude, userLocation.longitude];
@@ -188,7 +184,7 @@ const LiveMap = ({
 
   return (
     <div className={`relative ${height} w-full rounded-2xl overflow-hidden border border-slate-200 shadow-md z-0 flex flex-col`}>
-      {/* Top Map Control Bar */}
+   
       {showControls && (
         <div className="absolute top-3 left-3 right-3 z-[1000] flex flex-wrap items-center justify-between gap-2 pointer-events-none">
           {/* Filter Pills */}
